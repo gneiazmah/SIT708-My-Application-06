@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
     public DBHelper(Context con){
-        super(con, "DB_ITEMS", null, 1);
+        super(con, "DB_ITUBE", null, 1);
         this.con=con;
     }
 
@@ -23,10 +23,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return this;
     }
 
-    public boolean CreateNewItem(Items itemClass){
+    public boolean CreateNewUser(UserClass userClass){
         try
         {
-            db.execSQL("insert into Items values('"+itemClass.getID()+"','"+itemClass.getName()+"','"+itemClass.getPhone()+"','"+itemClass.getDescription()+"','"+itemClass.getDate()+"' ,'"+itemClass.getLocation()+"','"+itemClass.getPostType()+"')");
+            db.execSQL("insert into userInfo values('"+userClass.getUserId()+"','"+userClass.getFullName()+"','"+userClass.getPassword()+"')");
             return true;
         }
         catch(Exception ex)
@@ -36,11 +36,49 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor SearchAllProduct()
+    public ArrayList<UserClass> ValidLogin(String UserId, String Password)
+    {
+        ArrayList<UserClass> userList=new ArrayList<UserClass>();
+        try
+        {
+            Cursor cursor=db.rawQuery("select * from userInfo where UserID='"+UserId+"'and Password='"+Password+"'",null);
+            if(cursor.moveToFirst())
+            {
+                do{
+                    UserClass user=new UserClass();
+                    user.setUserId(cursor.getString(0));
+                    user.setPassword(cursor.getString(1));
+                    userList.add(user);
+
+                }while (cursor.moveToNext());
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return  userList;
+    }
+
+
+    public boolean CreateNewPlayListItem(PlayList playList){
+        try
+        {
+            db.execSQL("insert into PlayList values('"+playList.getID()+"','"+playList.getName()+"')");
+            return true;
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public Cursor SearchAllPlayLists()
     {
         Cursor cursor=null;
         try {
-            cursor=db.rawQuery("Select Name from Items ", null);
+            cursor=db.rawQuery("Select Name from PlayList ", null);
         }
         catch (Exception ex)
         {
@@ -49,21 +87,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-
-    public ArrayList<Items> SearchProduct(Integer ProductID)
+    public ArrayList<PlayList> SearchPlayItem(Integer ID)
     {
-        ArrayList<Items> productList = new ArrayList<>();
+        ArrayList<PlayList> myPlayList = new ArrayList<>();
         try {
-            Cursor cursor = db.rawQuery("Select * from Items where ItemID='" + ProductID + "' ", null);
+            Cursor cursor = db.rawQuery("Select * from PlayList where ID='" + ID + "' ", null);
             if (cursor.moveToFirst()) {
                 do {
-                    Items items = new Items();
-                    items.setID(cursor.getInt(0));
-                    items.setName(cursor.getString(1));
-                    items.setDate(cursor.getString(2));
-                    items.setLocation(cursor.getString(3));
-                    items.setPostType(cursor.getInt(4));
-                    productList.add(items);
+                    PlayList playList = new PlayList();
+                    playList.setID(cursor.getInt(0));
+                    playList.setName(cursor.getString(1));
+
+                    myPlayList.add(playList);
 
                 } while (cursor.moveToNext());
             }
@@ -72,14 +107,11 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             ex.printStackTrace();
         }
-        return productList;
+        return myPlayList;
     }
 
 
-    public Integer removeItemData(String id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Items", "ItemID = ?", new String[]{id});
-    }
+
 
 
     @Override
@@ -92,4 +124,3 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 }
-

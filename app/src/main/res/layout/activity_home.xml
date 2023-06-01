@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3C3C3C"
+    android:padding="30dp"
+    tools:context=".HomeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="left"
+            android:text="YouTube URL :"
+            android:textColor="#B1611C"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+
+        <EditText
+            android:id="@+id/etLink"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="#535251"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="left"
+            android:padding="10dp"
+            android:textColor="#B1611C"
+            android:textSize="18dp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:backgroundTint="#A61919"
+            android:text="Play"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAddPlayList"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:backgroundTint="#A61919"
+            android:text="ADD TO PLAYLIST"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnPlayList"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:backgroundTint="#A61919"
+            android:text="MY PLAYLIST"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

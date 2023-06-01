@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3C3C3C"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/lostfound"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="120dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnNewAdvert"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="#535251"
-        android:textAlignment="center"
-        android:text="CREATE A NEW ADVERT"
-        android:textColor="#B1611C"
-        android:textSize="15dp"
-        android:layout_below="@id/iv"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnShow"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_below="@id/btnNewAdvert"
-        android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#535251"
-        android:textAlignment="center"
-        android:text="SHOW ALL LOST AND FOUND ITEMS"
-        android:textColor="#B1611C"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                app:srcCompat="@drawable/music" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="Find your PlayList!"
+                android:textColor="#B1611C"
+                android:textSize="25dp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="80dp"
+                android:backgroundTint="#9F1F1F"
+                android:textAlignment="center"
+                android:text="LOGIN"
+                android:textColor="#FFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#9F1F1F"
+                android:textAlignment="center"
+                android:text="SIGN UP"
+                android:textColor="#FFF"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

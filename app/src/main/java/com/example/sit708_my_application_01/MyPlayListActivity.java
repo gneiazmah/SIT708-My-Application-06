@@ -14,26 +14,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ShowLostFoundItemsActivity extends AppCompatActivity {
+public class MyPlayListActivity extends AppCompatActivity {
 
-    ListView ListViewProducts;
+    ListView ListViewPlay;
 
     private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_lost_found_items);
+        setContentView(R.layout.activity_my_play_list);
+
 
         dbHelper=new DBHelper(this);
         dbHelper.OpenDB();
-        ListViewProducts=(ListView) findViewById(R.id.lst_L_Products);
+
+        ListViewPlay=(ListView) findViewById(R.id.list_PlayList);
 
         ArrayList<String> theList=new ArrayList<>();
-        Cursor cursor = dbHelper.SearchAllProduct();
+        Cursor cursor = dbHelper.SearchAllPlayLists();
         if(cursor.getCount()==0)
         {
-            Toast.makeText(getApplicationContext(), "Items could not found!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "PlayList is Empty!", Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -41,26 +43,24 @@ public class ShowLostFoundItemsActivity extends AppCompatActivity {
             {
                 theList.add(cursor.getString(0));
                 ListAdapter listAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,theList);
-                ListViewProducts.setAdapter(listAdapter);
+                ListViewPlay.setAdapter(listAdapter);
             }
         }
 
-        ListViewProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        ListViewPlay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                Integer productId = position;
-                ArrayList<Items> itemList= dbHelper.SearchProduct(productId);
-                if(itemList.size()!=0){
-                    Intent intentViewList = new Intent(ShowLostFoundItemsActivity.this, RemoveItemActivity.class);
-                    Items items= itemList.get(0);
-                    intentViewList.putExtra("Name",items.getName());
-                    intentViewList.putExtra("Datex", items.getDate());
-                    intentViewList.putExtra("Locationx",items.getLocation());
+                Integer ID = position;
+                ArrayList<PlayList> playLists= dbHelper.SearchPlayItem(ID);
+                if(playLists.size()!=0){
+                    Intent intentViewList = new Intent(MyPlayListActivity.this, PlayActivity.class);
+                    PlayList play = playLists.get(0);
+
+                    intentViewList.putExtra("VIDEO_LINK_VALUE",play.getName());
                     startActivity(intentViewList);
                 }
-
-
             }
         });
 
